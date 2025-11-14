@@ -1,0 +1,75 @@
+/* -----------------------------------
+ * Palet Warna Modern / Berani
+ * ----------------------------------- */
+
+/* 1. Warna Dominan & Teks Dasar */
+body {
+    background-color: #FFFFFF; /* Putih */
+    color: #333333; /* Teks gelap untuk keterbacaan, bukan abu-abu murni */
+}
+
+/* Terapkan font Inter yang bersih (jika belum ada) */
+body, .btn, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+}
+
+/* 2. Warna Sekunder */
+.text-muted, 
+.list-group-item {
+    color: #888888 !important; /* Abu-abu Sedang */
+}
+
+.list-group-item strong {
+    color: #333333; /* Warna teks utama */
+}
+
+/* 3. Warna Aksen (Harga) */
+.price-normal {
+    color: #0047AB; /* Biru Cobalt */
+}
+
+.price-asli {
+    color: #888888; /* Abu-abu Sedang */
+    text-decoration: line-through;
+}
+
+.price-diskon {
+    color: #F25C05; /* Oranye Terang */
+}
+
+/* 4. Warna Aksen (Tombol CTA) */
+/* Menimpa .btn-primary dari Bootstrap & Livewire */
+.btn-primary {
+    background-color: #FFDB58; /* Kuning Mustard */
+    border-color: #FFDB58;
+    color: #333333; /* Teks gelap di atas kuning */
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #e6c64c; /* Versi lebih gelap saat hover */
+    border-color: #e6c64c;
+    color: #333333;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 250px; /* kamu bisa ubah misal 220px atau 200px */
+    object-fit: cover; /* menjaga proporsi tanpa distorsi */
+    object-position: center; /* fokus ke bagian tengah gambar */
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+.card.h-100 {
+    transition: all 0.3s ease;
+}
+.card.h-100:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.card.h-100 .card-img-top {
+    transition: transform 0.4s ease;
+}
+.card.h-100:hover .card-img-top {
+    transform: scale(1.05);
+}
