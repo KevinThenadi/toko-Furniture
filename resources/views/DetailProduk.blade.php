@@ -87,7 +87,7 @@
     @endif
 </div>
 
-            <!-- [KOLOM INFO PRODUK] -->
+            <!-- KOLOM INFO PRODUK -->
             <div class="col-lg-6">
                 @if($produk->kategori)
                     <h6 class="text-secondary mb-2">{{ $produk->kategori->nama }}</h6>
