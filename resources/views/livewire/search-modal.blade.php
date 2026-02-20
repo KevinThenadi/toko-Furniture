@@ -1,5 +1,6 @@
 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true" 
-     wire:ignore.self> <div class="modal-dialog modal-dialog-centered modal-lg">
+     wire:ignore.self> 
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="searchModalLabel">Cari Produk</h5>
@@ -19,25 +20,34 @@
                     Mencari...
                 </div>
 
-                @if(!empty($hasil) && !$errors->any())
-                <hr>
-                <p class="text-muted">Hasil pencarian untuk: "{{ $cari }}"</p>
-                <ul class="list-group list-group-flush">
-                    @forelse($hasil as $produk)
-                        <li class="list-group-item">
-                            <a href="{{ route('produk.show', $produk) }}" class="text-decoration-none text-dark d-flex align-items-center">
-                                <img src="{{ asset('storage/foto/' . $produk->gambar_utama) }}" alt="{{ $produk->nama }}" style="width: 50px; height: 50px; object-fit: cover;" class="rounded me-3">
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-0">{{ $produk->nama }}</h6>
-                                    <span class="price-normal">{{ number_format($produk->harga, 0, ',', '.') }}</span>
-                                </div>
-                            </a>
-                        </li>
-                    @empty
-                        @endforelse
-                </ul>
+                @if(!empty($hasil))
+                    <hr>
+                    <p class="text-muted">Hasil pencarian untuk: "{{ $cari }}"</p>
+                    <ul class="list-group list-group-flush">
+                        @foreach($hasil as $produk)
+                            <li class="list-group-item">
+                                <a href="{{ route('produk.show', $produk['slug']) }}" class="text-decoration-none text-dark d-flex align-items-center">
+                                    
+                                    <img src="{{ asset('storage/foto/' . $produk['gambar_utama']) }}" 
+                                         alt="{{ $produk['nama'] }}" 
+                                         style="width: 50px; height: 50px; object-fit: cover;" 
+                                         class="rounded me-3">
+                                    
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-0">{{ $produk['nama'] }}</h6>
+                                        
+                                        <span class="price-normal">Rp {{ number_format($produk['harga'], 0, ',', '.') }}</span>
+                                    </div>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                
                 @elseif(strlen($cari) >= 3)
-                    <p class="p-3 text-center">Tidak ada hasil ditemukan untuk "{{ $cari }}".</p>
+                    <p class="p-3 text-center text-muted">
+                        <i class="bi bi-emoji-frown fs-4 d-block mb-2"></i>
+                        Tidak ada hasil ditemukan untuk "{{ $cari }}".
+                    </p>
                 @endif
 
             </div>

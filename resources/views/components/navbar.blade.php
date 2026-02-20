@@ -31,6 +31,25 @@
                 </button>
                 </li>
 
+                        <li class="nav-item">
+                <a href="{{ route('visual-search') }}" 
+                class="btn btn-outline-secondary border-0 position-relative" 
+                title="Cari dengan Gambar">
+                    <i class="bi bi-camera fs-5"></i>
+                    
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary" style="font-size: 0.5rem;">
+                        AI
+                    </span>
+                </a>
+            </li>
+
+                            <li class="nav-item">
+                    <a class="nav-link {{ request()->is('room-planner') ? 'active' : '' }}" 
+                    href="{{ url('/room-planner') }}" 
+                    style="color: #e67e22; font-weight: bold;">
+                    <i class="bi bi-palette-fill me-1"></i> Desain Ruangan
+                    </a>
+                </li>
                 <li class="nav-item">
                     <livewire:keranjang-ikon />
                 </li>

@@ -48,3 +48,7 @@ Route::get('/privasi', function () {
 Route::get('/syarat', function () {
     return view('syarat');
 })->name('syarat');
+
+Route::get('/visual-search', App\Livewire\VisualSearch::class)->name('visual-search');
+
+Route::view('/room-planner', 'room-planner')->name('room-planner');

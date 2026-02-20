@@ -14,80 +14,71 @@
 </head>
 <body>
 
-    <!-- Navbar -->
     <x-navbar />
 
-    <!-- Konten Detail Produk -->
     <section class="container py-5">
         <div class="row g-5">
 
-            <!-- [KOLOM GAMBAR] -->
-           <div class="col-lg-6">
-    <!-- Carousel Gambar -->
-    <div id="carouselProduk" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <!-- Gambar utama -->
-            <div class="carousel-item active">
-                <img src="{{ asset('storage/foto/' . $produk->gambar_utama) }}"
-                     class="d-block w-100 rounded shadow-sm img-zoom produk-img"
-                     alt="{{ $produk->nama }}"
-                     data-bs-toggle="modal"
-                     data-bs-target="#zoomModal"
-                     data-src="{{ asset('storage/foto/' . $produk->gambar_utama) }}">
+            <div class="col-lg-6">
+                <div id="carouselProduk" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ asset('storage/foto/' . $produk->gambar_utama) }}"
+                                 class="d-block w-100 rounded shadow-sm img-zoom produk-img"
+                                 alt="{{ $produk->nama }}"
+                                 data-bs-toggle="modal"
+                                 data-bs-target="#zoomModal"
+                                 data-src="{{ asset('storage/foto/' . $produk->gambar_utama) }}">
+                        </div>
+
+                        @if($produk->galeri_gambar && count($produk->galeri_gambar) > 0)
+                            @foreach($produk->galeri_gambar as $gambar)
+                            <div class="carousel-item">
+                                <img src="{{ asset('storage/foto/' . $gambar) }}"
+                                     class="d-block w-100 rounded shadow-sm img-zoom produk-img"
+                                     alt="Galeri {{ $produk->nama }}"
+                                     data-bs-toggle="modal"
+                                     data-bs-target="#zoomModal"
+                                     data-src="{{ asset('storage/foto/' . $gambar) }}">
+                            </div>
+                            @endforeach
+                        @endif
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduk" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Sebelumnya</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselProduk" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Selanjutnya</span>
+                    </button>
+                </div>
+
+                @if($produk->galeri_gambar && count($produk->galeri_gambar) > 0)
+                <div class="row g-2 mt-3">
+                    <div class="col-3">
+                        <img src="{{ asset('storage/foto/' . $produk->gambar_utama) }}"
+                             class="img-fluid rounded shadow-sm"
+                             alt="Gambar utama"
+                             data-bs-target="#carouselProduk"
+                             data-bs-slide-to="0"
+                             style="cursor:pointer;">
+                    </div>
+                    @foreach($produk->galeri_gambar as $key => $gambar)
+                    <div class="col-3">
+                        <img src="{{ asset('storage/foto/' . $gambar) }}"
+                             class="img-fluid rounded shadow-sm"
+                             alt="Galeri produk"
+                             data-bs-target="#carouselProduk"
+                             data-bs-slide-to="{{ $key + 1 }}"
+                             style="cursor:pointer;">
+                    </div>
+                    @endforeach
+                </div>
+                @endif
             </div>
 
-            <!-- Galeri tambahan -->
-            @if($produk->galeri_gambar && count($produk->galeri_gambar) > 0)
-                @foreach($produk->galeri_gambar as $gambar)
-                <div class="carousel-item">
-                    <img src="{{ asset('storage/foto/' . $gambar) }}"
-                         class="d-block w-100 rounded shadow-sm img-zoom produk-img"
-                         alt="Galeri {{ $produk->nama }}"
-                         data-bs-toggle="modal"
-                         data-bs-target="#zoomModal"
-                         data-src="{{ asset('storage/foto/' . $gambar) }}">
-                </div>
-                @endforeach
-            @endif
-        </div>
-
-        <!-- Tombol Navigasi Carousel -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduk" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Sebelumnya</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselProduk" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Selanjutnya</span>
-        </button>
-    </div>
-
-    <!-- Thumbnail bawah -->
-    @if($produk->galeri_gambar && count($produk->galeri_gambar) > 0)
-    <div class="row g-2 mt-3">
-        <div class="col-3">
-            <img src="{{ asset('storage/foto/' . $produk->gambar_utama) }}"
-                 class="img-fluid rounded shadow-sm"
-                 alt="Gambar utama"
-                 data-bs-target="#carouselProduk"
-                 data-bs-slide-to="0"
-                 style="cursor:pointer;">
-        </div>
-        @foreach($produk->galeri_gambar as $key => $gambar)
-        <div class="col-3">
-            <img src="{{ asset('storage/foto/' . $gambar) }}"
-                 class="img-fluid rounded shadow-sm"
-                 alt="Galeri produk"
-                 data-bs-target="#carouselProduk"
-                 data-bs-slide-to="{{ $key + 1 }}"
-                 style="cursor:pointer;">
-        </div>
-        @endforeach
-    </div>
-    @endif
-</div>
-
-            <!-- KOLOM INFO PRODUK -->
             <div class="col-lg-6">
                 @if($produk->kategori)
                     <h6 class="text-secondary mb-2">{{ $produk->kategori->nama }}</h6>
@@ -95,7 +86,6 @@
                 
                 <h1 class="fw-bold display-5">{{ $produk->nama }}</h1>
 
-                <!-- Harga -->
                 <div class="mb-3">
                     @if(isset($produk->harga_sebelum_diskon) && $produk->harga_sebelum_diskon > 0)
                         <s class="text-muted fs-4">Rp {{ number_format($produk->harga_sebelum_diskon, 0, ',', '.') }}</s>
@@ -118,13 +108,16 @@
                     <li class="list-group-item px-0"><strong>Stok:</strong> {{ $produk->stok > 0 ? 'Tersedia' : 'Habis' }}</li>
                 </ul>
 
-                <!-- Komponen Livewire -->
                 <livewire:tombol-add-to-cart-detail :produk="$produk" />
             </div>
         </div>
+
+        <div class="mt-5 pt-4">
+            <livewire:rekomendasi-produk :kategoriId="$produk->kategori_id" />
+        </div>
+
     </section>
 
-    <!-- Modal Zoom Gambar -->
     <div class="modal fade" id="zoomModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content bg-transparent border-0">
@@ -133,10 +126,8 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <x-footer />
 
-    <!-- Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
